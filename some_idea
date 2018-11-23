@@ -1,0 +1,6 @@
+1: change the NMS such as replace the default NMS as soft NMS, I have did the experiment which result shows that the soft NMS
+   is useful when the scence is crowded.
+2: the data process can be optimazed since the clip will bring some problem 
+3: focal loss need to be try 
+4: there are three output layers, while the three layers do not have the same negtive sample when they have same positive sample
+   (the code in yolo_layer.c shows that),I think this is one of the reasons that yolov3 do not have a good performance in big object

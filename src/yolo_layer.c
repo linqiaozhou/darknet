@@ -166,7 +166,8 @@ void forward_yolo_layer(const layer l, network net)
                     int best_t = 0;
                     for(t = 0; t < l.max_boxes; ++t){
                         box truth = float_to_box(net.truth + t*(4 + 1) + b*l.truths, 1);
-                        if(!truth.x) break;
+                        //if(!truth.x) break;
+                        if(!truth.x) continue;
                         float iou = box_iou(pred, truth);
                         if (iou > best_iou) {
                             best_iou = iou;
@@ -195,7 +196,8 @@ void forward_yolo_layer(const layer l, network net)
         for(t = 0; t < l.max_boxes; ++t){
             box truth = float_to_box(net.truth + t*(4 + 1) + b*l.truths, 1);
 
-            if(!truth.x) break;
+            //if(!truth.x) break;
+            if(!truth.x) continue;
             float best_iou = 0;
             int best_n = 0;
             i = (truth.x * l.w);

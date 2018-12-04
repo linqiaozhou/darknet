@@ -1,0 +1,294 @@
+[net]
+batch=128
+subdivisions=2
+height=227
+width=227
+channels=3
+momentum=0.9
+decay=0.0005
+
+learning_rate=0.001
+policy=steps
+steps=20,40,60,80,20000,30000
+scales=5,5,2,2,.1,.1
+max_batches=40000
+
+[crop]
+crop_width=227
+crop_height=227
+flip=0
+angle=0
+saturation = 1.5
+exposure = 1.5
+
+# SqueezeNet: conv1
+[convolutional]
+filters=64
+size=3
+stride=2
+activation=relu
+
+# SqueezeNet: pool1
+[maxpool]
+size=3
+stride=2
+
+# SqueezeNet: fire2/squeeze1x1
+[convolutional]
+filters=16
+size=1
+activation=relu
+
+# SqueezeNet: fire2/expand1x1
+[convolutional]
+filters=64
+size=1
+activation=relu
+
+# SqueezeNet: fire2/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire2/expand3x3
+[convolutional]
+filters=64
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire2/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: fire3/squeeze1x1
+[convolutional]
+filters=16
+size=1
+activation=relu
+
+# SqueezeNet:fire3/expand1x1
+[convolutional]
+filters=64
+size=1
+activation=relu
+
+# SqueezeNet: fire3/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire3/expand3x3
+[convolutional]
+filters=64
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire3/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: pool3
+[maxpool]
+size=3
+stride=2
+
+# SqueezeNet: fire4/squeeze1x1
+[convolutional]
+filters=32
+size=1
+activation=relu
+
+# SqueezeNet: fire4/expand1x1
+[convolutional]
+filters=128
+size=1
+activation=relu
+
+# SqueezeNet: fire4/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire4/expand3x3
+[convolutional]
+filters=128
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire4/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: fire5/squeeze1x1
+[convolutional]
+filters=32
+size=1
+activation=relu
+
+# SqueezeNet: fire5/expand1x1
+[convolutional]
+filters=128
+size=1
+activation=relu
+
+# SqueezeNet: fire5/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire5/expand3x3
+[convolutional]
+filters=128
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire5/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: pool5
+[maxpool]
+size=3
+stride=2
+
+# SqueezeNet: fire6/squeeze1x1
+[convolutional]
+filters=48
+size=1
+activation=relu
+
+# SqueezeNet: fire6/expand1x1
+[convolutional]
+filters=192
+size=1
+activation=relu
+
+# SqueezeNet: fire6/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire6/expand3x3
+[convolutional]
+filters=192
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire6/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: fire7/squeeze1x1
+[convolutional]
+filters=48
+size=1
+activation=relu
+
+# SqueezeNet: fire7/expand1x1
+[convolutional]
+filters=192
+size=1
+activation=relu
+
+# SqueezeNet: fire7/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire7/expand3x3
+[convolutional]
+filters=192
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire7/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: fire8/squeeze1x1
+[convolutional]
+filters=64
+size=1
+activation=relu
+
+# SqueezeNet: fire8/expand1x1
+[convolutional]
+filters=256
+size=1
+activation=relu
+
+# SqueezeNet: fire8/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire8/expand3x3
+[convolutional]
+filters=256
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire8/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: fire9/squeeze1x1
+[convolutional]
+filters=64
+size=1
+activation=relu
+
+# SqueezeNet: fire9/expand1x1
+[convolutional]
+filters=256
+size=1
+activation=relu
+
+# SqueezeNet: fire9/shortcut
+[route]
+layers=-2
+
+# SqueezeNet: fire9/expand3x3
+[convolutional]
+filters=256
+size=3
+pad=1
+activation=relu
+
+# SqueezeNet: fire9/route
+[route]
+layers=-3,-1
+
+# SqueezeNet: drop9
+[dropout]
+probability=.5
+
+# SqueezeNet: conv10
+[convolutional]
+filters=1000
+size=1
+activation=relu
+
+# SqueezeNet: pool10
+[avgpool]
+
+# YoLo: output = (5 * 2 + CLASSES) * SIDE^2
+[connected]
+output=539
+activation=linear
+
+# YoLo
+[detection]
+classes=1
+coords=4
+rescore=1
+side=7
+num=2
+softmax=0
+sqrt=1
+jitter=.2
+
+object_scale=1
+noobject_scale=.5
+class_scale=1
+coord_scale=5

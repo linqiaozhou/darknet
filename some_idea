@@ -4,3 +4,9 @@
 3: focal loss need to be try 
 4: there are three output layers, while the three layers do not have the same negtive sample when they have same positive sample
    (the code in yolo_layer.c shows that),I think this is one of the reasons that yolov3 do not have a good performance in big object
+5:以 YOLOv3 为例，默认对于 regression 损失都会上一个 (2-w*h) 的损失，w 和 h 分别是ground truth 的宽和高。如果不减去 w*h，AP 会有一个明显下降。如果继续往上加，如  (2-w*h)*1.5，总体的 AP 还会涨一个点左右（包括验证集和测试集）。当然这大概也有 COCO 中小物体实在太多的原因。
+
+作者：ChenJoya
+链接：https://www.zhihu.com/question/269877902/answer/548594081
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
